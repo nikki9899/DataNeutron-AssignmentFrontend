@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import BASE_URL from "./apiConfig";
 
 function App() {
   const defaultText = "";
@@ -14,7 +15,7 @@ function App() {
   }, []);
 
   const fetchData = () => {
-    fetch("https://dataneutron-assignmentbackend.onrender.com/all")
+    fetch(BASE_URL + "all") // Use BASE_URL instead of hard-coded URL
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -31,7 +32,7 @@ function App() {
   };
 
   const fetchCount = () => {
-    fetch("https://dataneutron-assignmentbackend.onrender.com/count")
+    fetch(BASE_URL + "count") // Use BASE_URL instead of hard-coded URL
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -61,7 +62,7 @@ function App() {
     const updatedItem = data.find(item => item._id === id);
     
     // Send the updated data to the backend using PUT
-    fetch(`https://dataneutron-assignmentbackend.onrender.com/update/${id}`, {
+    fetch(BASE_URL + `update/${id}`, { // Use BASE_URL instead of hard-coded URL
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ function App() {
     const dataToSend = { newData: { title: inputValue.trim() } };
 
     // Send the data to the backend using POST
-    fetch("https://dataneutron-assignmentbackend.onrender.com/add", {
+    fetch(BASE_URL + "add", { // Use BASE_URL instead of hard-coded URL
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -109,6 +110,7 @@ function App() {
         if (response.ok) {
           setInputValue("")
           return response.json();
+          
         }
         // Handle HTTP errors
         throw new Error("Failed to add new data.");
@@ -117,12 +119,14 @@ function App() {
         console.log("Success:", data);
         fetchData(); // Fetch updated data
         fetchCount(); // Fetch updated counts
+        alert("Data added successfully!"); // Display alert when data is added
       })
       .catch((error) => {
         console.error("Error:", error);
         alert("Error adding new todo. Please try again.");
       });
   };
+
 
   return (
     <div className="parent">

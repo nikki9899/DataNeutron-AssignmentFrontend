@@ -61,7 +61,7 @@ function App() {
         console.log("Success:", data);
         const updateEndTime = new Date().getTime(); // Record end time for updateTodo
         const updateExecutionTime = updateEndTime - updateStartTime; // Calculate execution time for updateTodo
-        console.log("updateTodo execution time:", updateExecutionTime + "ms");
+        console.log("update execution time:", updateExecutionTime + "ms");
         setData((prevData) =>
           prevData.map((item) =>
             item._id === id ? { ...item, editing: false } : item
@@ -90,7 +90,7 @@ function App() {
         setInputValue("");
         const addEndTime = new Date().getTime(); // Record end time for addTodo
         const addExecutionTime = addEndTime - addStartTime; // Calculate execution time for addTodo
-        console.log("addTodo execution time:", addExecutionTime + "ms");
+        console.log("add execution time:", addExecutionTime + "ms");
         fetchData() // Fetch updated data
           .then((newData) => setData(newData)) // Update data state with the newly fetched data
           .catch((error) => alert(error.message)); // Handle any errors
